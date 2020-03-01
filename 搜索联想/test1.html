@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模拟豆瓣搜索</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background-color: rgb(240, 243, 245);
+        }
+        .transverse{
+            position: absolute;
+            width: 666px;
+            height: 56px;
+            top: 100px;
+            left: 300px;
+        }
+        .left{
+            float: left;
+            width: 145px;
+            height: 56px;
+            margin-right: 13px;
+            background-image: url("./img/logo.png");
+            background-repeat: no-repeat;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+        .left img{
+            width: 100%;
+            height: 100%;
+        }
+        .center{
+            float: left;
+            width: 470px;
+            height: 56px;
+        }
+        .center input{
+            width: 100%;
+            height: 34px;
+            font-size: 13.3333px;
+            padding: 0 0 0 5px;
+            margin-top: 11px;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+            box-shadow: rgb(204, 204, 204) 0px 1px 2px;
+            border: none;
+            outline: none;
+        }
+        .right{
+            float: right;
+            width: 37px;
+            height: 34px;
+            background-image: url("./img/search.png");
+            background-repeat: no-repeat;
+            background-color: rgb(146, 155, 162);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+            margin-top: 11px;
+            background-position: center;
+            cursor: pointer;
+        }
+        .list{
+            position: absolute;
+            width: 470px;
+            left: 458px;
+            top: 146px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            
+            display: none;
+        }
+        .list ul{
+            width: 100%;
+            height: 100%;
+
+        }
+        .list ul li{
+            width: 460px;
+            height: 80px;
+            padding: 8px 0 8px 8px;
+            border-bottom: 1px solid #ddd;
+            background-color: #fff;
+        }
+        li .img{
+            float: left;
+            width: 45px;
+            height: 63px;
+            margin-right: 8px;
+        }
+        .img img{
+            width: 100%;
+            height: 100%;
+        }
+        .content{
+            float: left;
+        }
+        .content .title{
+            color: #27a;
+            font-size: 14px;
+            padding-right: 5px;
+        }
+        .content .year,.smallTitle,.langMovie{
+            color: #9b9b9b;
+            font-size: 12px;
+        }
+        .content div{
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="transverse">
+        <div class="left"></div>
+        <div class="center"><input type="text" placeholder="搜索电影、电视剧、综艺、影人"></div>
+        <div class="right"></div>
+    </div>
+    <div class="list">
+        <ul>
+            
+        </ul>
+    </div>
+    <script>
+        var searchObj = {
+  "长": [
+    {
+      "episode": "48",
+      "img": "./img/p2562953341.jpg",
+      "title": "长安十二时辰",
+      "url": "https:\/\/movie.douban.com\/subject\/26849758\/?suggest=%E9%95%BF",
+      "type": "movie",
+      "year": "2019",
+      "sub_title": "长安十二时辰",
+      "id": "26849758"
+    },
+    {
+      "episode": "",
+      "img": "./img/p2562953341.jpg",
+      "title": "长城",
+      "url": "https:\/\/movie.douban.com\/subject\/6982558\/?suggest=%E9%95%BF",
+      "type": "movie",
+      "year": "2016",
+      "sub_title": "The Great Wall",
+      "id": "6982558"
+    },
+    {
+      "episode": "",
+      "img": "./img/p2562953341.jpg",
+      "title": "长江七号",
+      "url": "https:\/\/movie.douban.com\/subject\/1961963\/?suggest=%E9%95%BF",
+      "type": "movie",
+      "year": "2008",
+      "sub_title": "长江七号",
+      "id": "1961963"
+    },
+    {
+      "img": "./img/p2562953341.jpg",
+      "title": "长泽雅美",
+      "url": "https:\/\/movie.douban.com\/celebrity\/1018667\/?suggest=%E9%95%BF",
+      "sub_title": "Masami Nagasawa",
+      "type": "celebrity",
+      "id": "1018667"
+    },
+    {
+      "img": "./img/p2562953341.jpg",
+      "title": "长濑智也",
+      "url": "https:\/\/movie.douban.com\/celebrity\/1041963\/?suggest=%E9%95%BF",
+      "sub_title": "Tomoya Nagase",
+      "type": "celebrity",
+      "id": "1041963"
+    },
+    {
+      "img": "./img/p2562953341.jpg",
+      "title": "长谷川博己",
+      "url": "https:\/\/movie.douban.com\/celebrity\/1275145\/?suggest=%E9%95%BF",
+      "sub_title": "Hiroki Hasegawa",
+      "type": "celebrity",
+      "id": "1275145"
+    }
+  ],
+  "长安": [
+    {
+      "episode": "61",
+      "img": "./img/p2562953341.jpg",
+      "title": "长安诺",
+      "url": "https:\/\/movie.douban.com\/subject\/30318029\/?suggest=%E9%95%BF%E5%AE%89",
+      "type": "movie",
+      "year": "2021",
+      "sub_title": "长安诺",
+      "id": "30318029"
+    },
+    {
+      "episode": "36",
+      "img": "./img/p2562953341.jpg",
+      "title": "长安三怪探",
+      "url": "https:\/\/movie.douban.com\/subject\/19967792\/?suggest=%E9%95%BF%E5%AE%89",
+      "type": "movie",
+      "year": "2014",
+      "sub_title": "长安三怪探",
+      "id": "19967792"
+    },
+    {
+      "episode": "24",
+      "img": "./img/p2562953341.jpg",
+      "title": "长安少年行",
+      "url": "https:\/\/movie.douban.com\/subject\/30459701\/?suggest=%E9%95%BF%E5%AE%89",
+      "type": "movie",
+      "year": "2020",
+      "sub_title": "长安少年行",
+      "id": "30459701"
+    },
+    {
+      "episode": "",
+      "img": "./img/p2562953341.jpg",
+      "title": "长安妖奇谈",
+      "url": "https:\/\/movie.douban.com\/subject\/30345469\/?suggest=%E9%95%BF%E5%AE%89",
+      "type": "movie",
+      "year": "2018",
+      "sub_title": "长安妖奇谈",
+      "id": "30345469"
+    }
+  ],
+  "长安道": [
+    {
+      "episode": "",
+      "img": "./img/p2562953341.jpg",
+      "title": "长安道",
+      "url": "https:\/\/movie.douban.com\/subject\/25747204\/?suggest=%E9%95%BF%E5%AE%89%E9%81%93",
+      "type": "movie",
+      "year": "2019",
+      "sub_title": "长安道",
+      "id": "25747204"
+    }
+  ]
+};
+        var oDbss = {
+            oInput : document.getElementsByTagName("input")[0],
+            oClc : document.getElementsByClassName("right")[0],
+            oList : document.getElementsByClassName("list")[0],
+            oUl : document.getElementsByTagName("ul")[0],
+            dataArr : [],
+            
+            getData : function (data){
+                for(var prop in data){
+                    this.dataArr.push(data[prop]);
+                }
+                var templeArr = this.dataArr[0];
+                var tempArr = templeArr.concat(this.dataArr[1]);
+                this.dataArr = tempArr.concat(this.dataArr[2]);
+            },
+            createEle : function (){
+                var len = this.dataArr.length;
+                for(var i = 0; i < len; i ++){
+                    if(this.dataArr[i].title.include(this.oInput.value)){
+                        var li = document.createElement("li");
+                        var divImg = document.createElement("div");
+                        divImg.className = "img";
+                        var img = document.createElement("img");
+                        img.src = this.dataArr[i].img;
+                        divImg.appendChild(img);
+                        var divContent = document.createElement("div");
+                        divContent.className = "content";
+                        var divTop = document.createElement("div");
+                        var spanTitle = document.createElement("span");
+                        spanTitle.className = "title";
+                        spanTitle.innerText = ""+this.dataArr[i].title+"";
+                        var spanYear = document.createElement("span");
+                        spanYear.className = "year";
+                        if(this.dataArr[i].year){
+                            spanYear.innerText = ""+this.dataArr[i].year+"";
+                        }else{
+                            spanYear.innerText = " ";
+                        }
+                        divTop.appendChild(spanTitle);
+                        divTop.appendChild(spanYear);
+                        var divSmallTitle = document.createElement("div");
+                        divSmallTitle.className = "smallTitle";
+                        divSmallTitle.innerText = ""+this.dataArr[i].sub_title+"";
+                        var divLangMovie = document.createElement("div");
+                        divLangMovie.className = "langMovie";
+                        if(this.dataArr[i].episode){
+                            divLangMovie.innerText = ""+this.dataArr[i].episode+"集";
+                        }else{
+                            divLangMovie.innerText = " ";
+                        }
+                        divContent.appendChild(divTop);
+                        divContent.appendChild(divSmallTitle);
+                        divContent.appendChild(divLangMovie);
+                        li.appendChild(divImg);
+                        li.appendChild(divContent);
+                        this.oUl.appendChild(li)
+                        this.oList.style.display = "block";
+                    }
+                }
+            },
+            inputChange : function () {
+                this.oInput.oninput = function (){
+                            if(this.value.length == 0){
+                                oDbss.oUl.style.display = "none";
+                            }else{
+                                oDbss.oUl.style.display = "block";
+                            }
+                            oDbss.oUl.innerHTML = ``;
+                            oDbss.createEle();
+                }
+            }
+        }
+        String.prototype.include = function (string){
+            var len = string.length;
+            var num = 0;
+            for(var i = 0; i < len; i ++){
+                if(this.indexOf(string[i]) != -1){
+                    num ++;
+                }
+            }
+            if(num === len){
+                return true;
+            }else{
+                return false;
+        }
+}
+        oDbss.getData(searchObj);
+        oDbss.inputChange();
+    </script>
+</body>
+</html>
