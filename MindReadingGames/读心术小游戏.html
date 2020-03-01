@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>读心术小游戏</title>
+    <style>
+        .left,.right{
+            width: 300px;
+            margin-left: 200px;
+            margin-top: 50px;
+            float: left;
+        }
+        .left .top{
+            width: 300px;
+            height: 300px;
+            margin-bottom: 20px;
+            background-image: url("./img/bg.gif");
+            position: relative;
+            cursor: pointer;
+            transition: 5s;
+        }
+        .imgResult,.imgBg{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .imgResult{
+            display: none;
+        }
+        .left .bottom span{
+            display: block;
+            margin-top: 10px;
+            text-indent: 2em;
+        }
+        .right{
+            /* margin-left: 40px; */
+            width: 500px;
+            
+        }
+        .right div img{
+            width: 16px;
+            height: 16px;
+        }
+        .right div span{
+            vertical-align: 2px;
+            margin-right: 5px;
+        }
+        .right div{
+            float: left;
+            margin-right: 30px;
+            min-width: 3em;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left">
+        <div class="top">
+            <div class="imgBg"><img src="./img/round.png" alt=""></div>
+            <div class="imgResult"></div>
+        </div>
+        <div class="bottom">
+            <span>在心中任意选择一个两位数（或者说，从10~99之间任意选择一个数），把这个数字分别减去其十位数和个位数（例如你选择的是71,那就：71-7-1=63）。</span>
+            <span>在右边图表中找出与最后得出的数所相应的图形，并把这个图形牢记心中，然后点击上方的阵型。你会发现，阵型所显示出来的图形就是你刚刚心里记下的那个图形。</span>
+        </div>
+    </div>
+    <div class="right">
+        
+    </div>
+    <script>
+        var myPlay = {
+            imgBg : document.getElementsByClassName("imgBg")[0],
+            imgResult : document.getElementsByClassName("imgResult")[0],
+            right : document.getElementsByClassName("right")[0],
+            top : document.getElementsByClassName("top")[0],
+            result : 0,
+            createSmallImg : function (){
+                result = this.getRandom(0,16);
+                for(var i = 0; i < 100; i ++){
+                    var div = document.createElement("div");
+                    var span = document.createElement("span");
+                    var img = document.createElement("img");
+                    if(i % 9 ===0){
+                        img.src = "./img/values/"+result+".png";
+                    }
+                    else{
+                        img.src = "./img/values/"+this.getRandom(0,16)+".png";
+                    }
+                    span.innerText = i;
+                    div.appendChild(span);
+                    div.appendChild(img);
+                    this.right.appendChild(div);
+                }
+            },
+            getRandom : function (min,max){
+                return Math.floor(Math.random()*(max - min) + min);
+            },
+            getResult : function () {
+                var that = this;
+                var img1 = document.createElement("img");
+                img1.src = "./img/values/"+result+".png";
+                this.imgResult.appendChild(img1);
+                that.top.addEventListener("click",function(){
+                    this.style.transform = "rotate(1800deg)";
+                    this.addEventListener("transitionend",function (){
+                        that.imgBg.style.display = "none";
+                        that.imgResult.style.display = "block";
+                    })   
+                },{once:true}) 
+            }
+        }
+        myPlay.createSmallImg();
+        myPlay.getResult();
+    </script>
+</body>
+</html>

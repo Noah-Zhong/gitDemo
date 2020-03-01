@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品添加</title>
+    <style>
+        .app{
+            width: 600px;
+            margin: 50px auto;
+            text-align: center;
+        }
+        button{
+            cursor: pointer;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 50px auto;
+        }
+        table td{
+            border: 1px solid #ccc;
+            height: 40px;
+            line-height: 40px;
+            
+        }
+        table thead{
+            font-weight: bold;
+        }
+        .btnStyle{
+            position: relative;
+        }
+        .left,.right{
+            position: absolute;
+            width: 45px;
+            height: 30px;
+            font-size: 16px;
+            border: none;
+            top: 6px;
+        }
+        .left{
+            left: 10px;
+        }
+        .right{
+            right: 10px;
+        }
+        input{
+            width: 100px;
+            height: 25px;
+            text-align: center;
+        }
+        tfoot td{
+            width: 50%;
+        }
+        .setColor tr:nth-child(odd){
+            background-color: rgb(14, 170, 162);
+            color: black;
+        }
+        .setColor tr:nth-child(even){
+            background-color: rgb(13, 180, 69);
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="app" >
+        <h1>商品和库存管理</h1>
+        <p>共 <strong>{{ wares.length }}</strong> 件商品</p>
+        <button @click="isSetColor = !isSetColor">切换颜色</button>
+        <table :class="isSetColor? 'setColor':''">
+            <thead>
+                <tr>
+                    <td>商品名称</td>
+                    <td>商品单价（单位：元）</td>
+                    <td>商品库存</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in wares" :key="index">
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td class="btnStyle"><button class="left" @click="reduceNumber(item)">-</button>{{ item.number }}<button class="right" @click="addNumber(item)">+</button></td>
+                    <td><button @click="wares.splice(index,1)">删除</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" v-model="tempWares.name"></td>
+                    <td><input type="number" v-model.number="tempWares.price"></td>
+                    <td><input type="number" v-model.number="tempWares.number"></td>
+                    <td><button @click="addWares">添加</button></td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">总计</td>
+                    <td colspan="2">{{sumPrice}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: ".app",
+            data: {
+                wares: [
+                    {name: "小米手机",number: 10,price: 10},
+                    {name: "华为手机",number: 20,price: 20},
+                    {name: "苹果手机",number: 30,price: 30}
+                ],
+                tempWares: {name: "",number: "",price: ""},
+                allPrice: 0,
+                isSetColor:false
+            },
+            methods: {
+                reduceNumber: function (item){
+                    if(item.number <= 0){
+                        return;
+                    }
+                    item.number--;
+                },
+                addNumber: function (item){
+                    item.number ++;
+                },
+                addWares: function (){
+                    if(this.tempWares.name==""||this.tempWares.price==""||this.tempWares.number==""){
+                        alert("请填写完整信息！")
+                        return;
+                    }
+                    this.wares.push(this.tempWares);
+                    this.tempWares = {name: "",number: "",price: ""};
+                }
+            },
+            computed: {
+                sumPrice: function (){
+                    this.allPrice = 0;
+                    var len = this.wares.length
+                    for(var i = 0; i < len; i++){
+                        this.allPrice += (this.wares[i].price * this.wares[i].number);
+                    }
+                    return this.allPrice;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

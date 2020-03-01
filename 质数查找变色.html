@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>质数查找</title>
+    <style>
+        body{
+            background-color: rgb(19, 87, 70);
+            padding: 20px;
+            cursor: pointer;
+        }
+        .numbers{
+            width: 100%;
+            height: 100%;
+        }
+        .numbers span{
+            min-width: 2em;
+            float: left;
+            /* border: 1px solid #fff; */
+            margin-right: 10px;
+        }
+        .bgNumber{
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            /* border: 1px solid #fff; */
+            font-size: 8em;
+            color: rgba(240, 234, 234,.6);
+        }
+        .bgNumber .overLap{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="numbers">   
+    </div>
+    <div class="bgNumber">
+        <div class="center"></div>
+    </div>
+    <script>
+        var oPrime ={
+            smallNumber : document.getElementsByClassName("numbers")[0],
+            bgNumber : document.getElementsByClassName("bgNumber")[0],
+            centerNumber : document.getElementsByClassName("center")[0],
+            colors : ["#0f0","#f00","#f0f","#0ff","#ff0","#fff"],
+            number : 1,
+            timer : null,
+            getRandom : function (min , max){
+                return Math.floor(Math.random()*(max - min) + min);
+            },
+            getRandomColor : function (){
+                return this.colors[this.getRandom(0,this.colors.length)];
+            },
+            createSpan : function (){
+                var span = document.createElement("span");
+                span.innerText = this.number;
+                this.centerNumber.innerText = this.number;
+                this.smallNumber.appendChild(span);
+                if(this.isPrime()){
+                    span.style.color = this.getRandomColor();
+                    var div = document.createElement("div");
+                    div.className = "overLap";
+                    div.innerText = this.number;
+                    div.style.color = span.style.color;
+                    div.style.transition = "1s ease-in";
+                    this.bgNumber.appendChild(div);
+                    getComputedStyle(div).top;
+                    div.style.transform = "translate("+this.getRandom(-300,300)+"px,"+this.getRandom(-300,300)+"px)";
+                    div.style.opacity = 0;
+                    div.addEventListener("transitionend",function (){
+                        div.remove();
+                    },{once:true})
+                }
+                this.number++;
+                span.scrollIntoView();
+            },
+            isPrime : function (){
+                for(var i = 2; i < this.number; i ++){
+                    if(this.number % i === 0){
+                        return false;
+                    }
+                }
+                return true;
+            },
+            start : function (){
+                if(this.timer){
+                    return;
+                }
+                var that = this;
+                this.timer = setInterval(function (){
+                    that.createSpan();
+                },100)
+                
+            },
+            stop : function (){
+                clearInterval(this.timer);
+                this.timer = null;
+            }
+        }
+        window.onclick = function (){
+            if(oPrime.timer){
+                oPrime.stop();
+            }else{
+                oPrime.start();
+            }
+        }
+    </script>
+</body>
+</html>
