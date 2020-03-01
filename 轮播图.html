@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>轮播图</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{
+    text-decoration: none;
+}
+.rotateImg{
+    position: relative;
+    width: 520px;
+    height: 280px;
+    background: lightblue;
+    margin: 100px auto;
+    overflow: hidden;
+    border: 2px solid rgb(172, 165, 165);
+}
+.rotateImg img{
+    width: 520px;
+    height: 280px;
+    /* display: none; */
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    height: 0;
+    transition: opacity .5s;
+}
+.rotateImg .rotate-img img{
+    /* display: block; */
+    opacity: 1;
+    height: auto;
+}
+.pointer{
+    width: 100px;
+    height: 20px;
+    line-height: 0px;
+    background: rgba(226, 220, 220, 0.5);
+    border-radius: 10px;
+    text-align: center;
+    position: absolute;
+    bottom: 10px;
+    left: 200px;
+    cursor: default;
+}
+.pointer ul li{
+    width: 8px;
+    height: 8px;
+    padding: 1px;
+    background: #fff;
+    text-align: center;
+    cursor: pointer;
+    font-size: 0;
+    border-radius: 50%;
+    margin-right: 5px;
+    display: inline-block;
+}
+.pointer ul li:last-child{
+    margin-right: 0;
+}
+.pointer ul li:hover{
+    background: #008c8c;
+}
+.pointer ul li.col{
+    background: #008c8c;
+}
+.arrow{
+    display: none;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    background: rgba(0, 0, 0, .5);
+    font-size: 30px;
+    top: 50%;
+    text-align: center;
+    color: rgb(206, 201, 201);
+    border-radius: 50%;
+    cursor: pointer;
+    -moz-user-select:none;/*火狐*/
+    -webkit-user-select:none;/*webkit浏览器*/
+    -ms-user-select:none;/*IE10*/
+    -khtml-user-select:none;/*早期浏览器*/
+    user-select:none;
+}
+.arrow-left{
+    left: 10px;
+}
+.arrow-right{
+    right: 10px;
+}
+    </style>
+</head>
+<body>
+    <div class="rotateImg">
+        <a class="rotate-img" href="https://pages.tmall.com/wow/a/act/tmall/tmc/24794/wupr?spm=a21bo.2017.201862-1.d1.5af911d96wmiF0&pos=1&wh_pid=main-178012&acm=20140506001.1003.2.7078548&scm=1003.2.20140506001.OTHER_1574105869502_7078548">
+            <img src="https://img.alicdn.com/tfs/TB1.tVKquH2gK0jSZFEXXcqMpXa-520-280.jpg_q90_.webp" alt="">
+        </a>
+        <a href="https://v37fs.tmall.com/shop/view_shop.htm?ali_trackid=17_15b38d94d63779ca7d0a489bae46b12e&spm=a21bo.2017.201862-2.1" >
+            <img src="https://img.alicdn.com/simba/img/TB1fYlQkAL0gK0jSZFASuwA9pXa.jpg" alt="">
+        </a>
+        <a href="https://nanshinz.tmall.com/shop/view_shop.htm?ali_trackid=30_0b4068c815367511ea1ad47edbfe679c&spm=a21bo.2017.201862-3.1">
+            <img src="https://img.alicdn.com/simba/img/TB1UOLgnhD1gK0jSZFsSuvldVXa.jpg" alt="">
+        </a>
+        <a href="https://gxgjeansoutlets.tmall.com/shop/view_shop.htm?ali_trackid=17_394a0083098c98bbb2817346ed2d88b0&spm=a21bo.2017.201862-4.1" >
+            <img src="https://img.alicdn.com/simba/img/TB19Xi2qhn1gK0jSZKPSutvUXXa.jpg" alt="">
+        </a>
+        <a href="https://pages.tmall.com/wow/a/act/tmall/tmc/24794/wupr?spm=a21bo.2017.201862-5.d1.5af911d96wmiF0&pos=1&wh_pid=main-178012&acm=20140506002.1003.2.7078572&scm=1003.2.20140506002.OTHER_1576886732949_7078572" >
+            <img src="https://img.alicdn.com/tfs/TB1reiWqfb2gK0jSZK9XXaEgFXa-520-280.jpg_q90_.webp" alt="">
+        </a>
+        <div class="pointer">
+            <ul>
+                <li class="col">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+            </ul>
+        </div>
+            <div class="arrow arrow-left">&lt;</div>
+            <div class="arrow arrow-right">&gt;</div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            var speed = 3000;
+            var m = 1;
+            var playTimer = setInterval(runPlay, speed);
+            function runPlay(){
+                if(m > 4){
+                    m = 0;
+                }
+                controlPlay(m);
+                m ++;
+            }
+            function controlPlay(n){
+                $(".rotateImg a").removeClass("rotate-img").eq(n).addClass("rotate-img")
+                $(".pointer li").removeClass("col").eq(n).addClass("col")
+            }
+            $(".rotateImg").mouseenter(function(){
+                clearInterval(playTimer);
+                $(".arrow").fadeIn(300)
+            }).mouseleave(function(){
+                playTimer = setInterval(runPlay,speed);
+                $(".arrow").fadeOut(300)
+            });
+            $(".pointer li").click(function(){
+                controlPlay($(this).index());
+                m = $(this).index() + 1;
+            }).hover(function(){  //阻止冒泡
+                return false;
+            });
+            $(".arrow").hover(function(){
+                return false;
+            });
+            $(".arrow-right").click(function(){
+                controlPlay(m);
+                m ++;
+                if(m > 4){
+                    m = 0;
+                }
+                
+            });
+            $(".arrow-left").click(function(){
+                m -= 2;
+                if( m < 0){
+                    m = 4;
+                };
+                controlPlay(m);
+                m ++;
+
+            })
+        })
+    </script>
+</body>
+</html>
