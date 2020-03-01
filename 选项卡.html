@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>选项卡</title>
+    <style>
+        html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a{
+    text-decoration: none;
+}
+.clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.option{
+    width: 600px;
+    margin: 10px auto;
+    position: relative;
+}
+.option .order li{
+    float: left;
+    
+}
+.option .order li .title{
+    width: 118px;
+    text-align: center;
+    line-height: 40px;
+    border: 1px solid #999;
+    background: rgb(216, 214, 214);
+    cursor: pointer;
+}
+.option .order li .content{
+    width: 600px;
+    height: 360px;
+    position: absolute;
+    top: 41px;
+    left: 0;
+    line-height: 360px;
+    border: 1px solid #999;
+    border-top: none;
+    box-sizing: border-box;
+    background: #fff;
+    display: none;
+    z-index: -1;
+}
+.option .order li.border-bot .title{
+    border-bottom: none;
+    background: #fff;
+}
+    </style>
+</head>
+<body>
+    <div class="option clearfix">
+        <ul class="order clearfix">
+            <li>
+                <div class="title">未付款订单</div>
+                <div class="content">您的订单未付款</div>
+            </li>
+            <li>
+                <div class="title">未发货订单</div>
+                <div class="content">您有未发货订单</div>
+            </li>
+            <li>
+                <div class="title">未收货订单</div>
+                <div class="content">您有包裹未领取</div>
+            </li>
+            <li>
+                <div class="title">未评价订单</div>
+                <div class="content">您有未评价订单</div>
+            </li>
+            <li>
+                <div class="title">失效订单</div>
+                <div class="content">订单已失效</div>
+            </li>
+        </ul>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $(".option .order li").mouseover(function(){
+                $(this).addClass("border-bot").children(".content").css("display","block").end().siblings("li").removeClass("border-bot").children(".content").css("display","none")
+            })
+            $(".option .order li").mouseout(function(){
+                $(this).removeClass("border-bot").children(".content").css("display","none")
+            })
+        })
+    </script>
+</body>
+</html>
